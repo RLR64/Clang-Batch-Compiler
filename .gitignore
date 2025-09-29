@@ -1,0 +1,77 @@
+# Clang Batch Compiler .gitignore
+
+# Compiled executables
+*.exe
+
+# Object files
+*.o
+*.obj
+
+# Debug files
+*.pdb
+*.ilk
+
+# Static libraries
+*.lib
+*.a
+
+# Dynamic libraries
+*.dll
+*.so
+*.dylib
+
+# Clang/LLVM generated files
+*.bc
+*.ll
+
+# Temporary files
+*.tmp
+*.temp
+
+# Editor/IDE files
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Test output files
+test_*
+*_test.exe
+
+# Profiling files
+*.gcda
+*.gcno
+*.gcov
+
+# Address Sanitizer files
+*.dSYM/
+
+# Windows specific
+*.lnk
+
+# Backup files
+*.bak
+*.orig
+
+# Example/test C/C++ files (uncomment if you don't want to track example code)
+# example.c
+# example.cpp
+# test.c
+# test.cpp
+# main.c
+# main.cpp
+
+# CMake files (if someone decides to add CMake later)
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Clang compilation database
+compile_commands.json
+
+# Core dumps
+core
+*.core
