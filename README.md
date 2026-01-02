@@ -263,7 +263,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Created for developers who prefer lightweight, scriptable build tools
 
 ## Attribution
-Icon designed by Abdulla Ashraf from iconfinder ([author profile](https://www.iconfinder.com/Black-man))
+Icon designed by Abdulla Ashraf from freepik ([author profile](https://www.freepik.com/))
 Edited with a black glow.
 
 LLVM Logo from the LLVM Foundation ([llvm.org](https://llvm.org))
