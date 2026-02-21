@@ -220,4 +220,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [LLVM Project](https://llvm.org/)
 - [CMake Documentation](https://cmake.org/documentation/)
 - [Learn C++](https://www.learncpp.com/)
-- [Erarnitox](https://github.com/Erarnitox | https://www.youtube.com/@Erarnitox)
+- [Erarnitox](https://github.com/Erarnitox)
