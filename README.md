@@ -109,18 +109,18 @@ release/hello_world.exe
 
 ### Debug Builds
 
-- **Standards:** `-std=c23` / `-std=c++26`
-- **Warnings:** `-Wall -Wcast-align -Wconversion -Wdouble-promotion -Werror -Wextra -Wformat=2 -Wnull-dereference -Wpedantic -Wshadow`
-- **Debug:** `-g -O0`
+**Standards:** `-std=c23` / `-std=c++26`
+**Warnings:** `-Wall -Wcast-align -Wconversion -Wdouble-promotion -Werror -Wextra -Wformat=2 -Wnull-dereference -Wpedantic -Wshadow`
+**Debug:** `-g -O0`
 
 ### Release Builds
 
-- **Optimization:** `-O3 -DNDEBUG`
+**Optimization:** `-O3 -DNDEBUG`
 - All warning flags enabled
 
 ### Sanitizer Builds
 
-- **Sanitizers:** `-fsanitize=address,undefined`
+**Sanitizers:** `-fsanitize=address,undefined`
 - All debug flags enabled
 
 ## CMake Configuration
@@ -135,18 +135,18 @@ Generated projects include the following:
 
 ### CMakePresets.json
 
-- **Debug preset:** 
+**Debug preset:** 
 - Full debugging symbols, no optimization
 
-- **Release preset:** Maximum optimization
+**Release preset:** Maximum optimization
 - Ninja generator for fast builds
 - Separate build directories (`debug/` and `release/`)
 
-- **CMake Commands For Debug Build**
+**CMake Commands For Debug Build**
 - cmake --preset debug
 - cmake --build debug/
 
-- **CMake Commands For Release Build**
+**CMake Commands For Release Build**
 - cmake --preset release
 - cmake --build release/
 
