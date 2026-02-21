@@ -163,8 +163,9 @@ Each example includes:
 
 ## Standard C and C++ Detection
 
-- There is an included print_c_standard.c and print_cpp_standard.cpp files included where you can run the 0_compile_auto.bat file which will compile both of the files into their own exes.
-- When running them they will tell you which Standard you are using and the code is a edited version on the L
+There is an included print_c_standard.c and print_cpp_standard.cpp files included where you can run the 0_compile_auto.bat file which will compile both of the files into their own exes.
+
+When running them they will tell you which Standard you are using and the code is a edited version on learncpp 
 
 ## Notes
 
