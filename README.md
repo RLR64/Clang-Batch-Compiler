@@ -16,9 +16,9 @@ A collection of Windows batch scripts for efficient C/C++ development using Clan
 - **CMake** 4.2.0 or newer
 - **Ninja** 1.13 or newer
 
-- If you are on Windows you can run `winget -upgrade` to show the list of programs that need updating and then run `winget -upgrade --all` which can upgrade LLVM/Clang and CMake.
-- With Ninja you will have to update it manually and simply replace the exe with the new one that you get here (https://github.com/ninja-build/ninja/releases)
-- Here is how to setup LLVM on Windows (https://www.youtube.com/watch?v=WNvL4hGid3Y)
+If you are on Windows you can run `winget -upgrade` to show the list of programs that need updating and then run `winget -upgrade --all` which can upgrade LLVM/Clang and CMake.
+With Ninja you will have to update it manually and simply replace the exe with the new one that you get here (https://github.com/ninja-build/ninja/releases)
+Here is how to setup LLVM on Windows (https://www.youtube.com/watch?v=WNvL4hGid3Y)
 
 ## Quick Compilation Scripts
 
@@ -40,8 +40,9 @@ A collection of Windows batch scripts for efficient C/C++ development using Clan
 
 - `5_generate_c_project.bat` - Create C23 Hello World project with CMake setup
 - `5_generate_cpp_project.bat` - Create C++26 Hello World project with CMake setup
-- You can check what the CMakelists.txt and CMakePresets.json file that you can find in the CMake Examples for both C23 and C++26
-- Feel free to edit them to your needs
+
+You can check what the CMakelists.txt and CMakePresets.json file that you can find in the CMake Examples for both C23 and C++26
+Feel free to edit them to your needs
 
 ## Usage
 
