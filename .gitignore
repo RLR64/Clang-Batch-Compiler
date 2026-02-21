@@ -1,77 +1,86 @@
 # Clang Batch Compiler .gitignore
 
+# Build directories
+debug/
+release/
+build/
+out/
+src/
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps/
+
+# CMake Examples
+C23_cmake_example/
+C++26_cmake_example/
+
 # Compiled executables
 *.exe
+*.out
+*.app
 
 # Object files
 *.o
 *.obj
+*.lo
+*.slo
+
+# Precompiled headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.so
+*.so.*
+*.dylib
+*.dll
 
 # Debug files
+*.dSYM/
+*.su
+*.idb
 *.pdb
 *.ilk
 
-# Static libraries
-*.lib
-*.a
+# Linker output
+*.exp
+*.map
 
-# Dynamic libraries
-*.dll
-*.so
-*.dylib
+# Visual Studio / VS Code
+.vs/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vcxproj
+*.vcxproj.filters
 
-# Clang/LLVM generated files
-*.bc
-*.ll
+# Ninja
+.ninja_deps
+.ninja_log
+
+# Clang tools
+.clang-format
+.clang-tidy
+.cache/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
 
 # Temporary files
 *.tmp
-*.temp
-
-# Editor/IDE files
-.vscode/
 *.swp
 *.swo
 *~
-.DS_Store
-Thumbs.db
-
-# Test output files
-test_*
-*_test.exe
-
-# Profiling files
-*.gcda
-*.gcno
-*.gcov
-
-# Address Sanitizer files
-*.dSYM/
-
-# Windows specific
-*.lnk
-
-# Backup files
-*.bak
-*.orig
-
-# Example/test C/C++ files (uncomment if you don't want to track example code)
-# example.c
-# example.cpp
-# test.c
-# test.cpp
-# main.c
-# main.cpp
-
-# CMake files (if someone decides to add CMake later)
-CMakeFiles/
-CMakeCache.txt
-cmake_install.cmake
-Makefile
-
-# Clang compilation database
-compile_commands.json
-
-# Core dumps
-core
-*.core

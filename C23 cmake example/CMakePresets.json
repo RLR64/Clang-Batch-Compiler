@@ -1,0 +1,44 @@
+{
+    "version" : 8,
+    "cmakeMinimumRequired": {
+        "major" : 4,
+        "minor" : 2,
+        "patch" : 0
+    },
+    "configurePresets" : [
+        {
+            "name" : "debug",
+            "displayName" : "debug",
+            "description" : "Debug Build using Clang and Ninja",
+            "generator" : "Ninja",
+            "binaryDir" : "${sourceDir}/debug",
+            "cacheVariables" : {
+                "CMAKE_C_COMPILER" : "clang",
+                "CMAKE_BUILD_TYPE" : "Debug",
+                "CMAKE_EXPORT_COMPILE_COMMANDS" : true
+            }
+        },
+        {
+            "name" : "release",
+            "displayName" : "release",
+            "description" : "Release Build using Clang and Ninja",
+            "generator" : "Ninja",
+            "binaryDir" : "${sourceDir}/release",
+            "cacheVariables" : {
+                "CMAKE_C_COMPILER" : "clang",
+                "CMAKE_BUILD_TYPE" : "Release",
+                "CMAKE_EXPORT_COMPILE_COMMANDS" : true
+            }
+        }
+    ],
+    "buildPresets" : [
+        {
+            "name" : "debug",
+            "configurePreset" : "debug"
+        },
+        {
+            "name" : "release",
+            "configurePreset" : "release"
+        }
+   ]
+}

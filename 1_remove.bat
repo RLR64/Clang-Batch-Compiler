@@ -19,10 +19,12 @@ for %%F in (*.pdb) do (
     echo Removed: %%F
 )
 
-:: Remove .obj files (object files) - common in C and C++ development
+:: Remove .obj files (object files)
 for %%F in (*.obj) do (
     del "%%F"
     echo Removed: %%F
 )
 
+echo.
 echo Cleanup complete!
+echo.

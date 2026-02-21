@@ -1,274 +1,222 @@
 # Clang Batch Compiler
 
-A comprehensive Windows batch-based compilation toolkit using LLVM Clang for C/C++ development. If you don't have CMake setup and would like to get straight to coding with multiple build configurations, static analysis, and automated workflows using batch files.
-
-## Overview
-
-The Clang Batch Compiler provides a complete suite of batch files for common C/C++ compilation tasks. All executables are created in the current directory alongside your source files. The toolkit is designed for developers who need reliable batch compilation for their C and C++ projects but who don't have a build system like CMake setup.
-
-If you'd like to read about LLVM, here's a great article by Ayman Alheraki on SimplifyC++:
-
-[Understanding LLVM: The Backbone of Modern Compiler Development](https://www.simplifycpp.org/index.php?id=a0639)
-
-**Key Features:**
-- **Zero Configuration**: Drop batch files in your project folder and compile immediately
-- **Multiple Build Types**: Development, release, sanitized, and threaded compilation modes
-- **Static Analysis**: Built-in clang-tidy integration for code quality assurance
-- **Auto-Detection**: Automatically finds and compiles all `.c` and `.cpp` files in the directory
-- **Modern Standards**: Uses C23 and C++23 by default with strict warning policies
-- **Easy Cleanup**: Remove all build artifacts with a single command
+A collection of Windows batch scripts for efficient C/C++ development using Clang/LLVM. Simplifies compilation, project generation, code formatting, and static analysis with modern C23 and C++26 support.
 
 ## Features
 
-- **Comprehensive Build Support**: Development, release, AddressSanitizer, and threading configurations
-- **Modern C/C++ Standards**: C23 and C++23 support with strict compiler warnings
-- **Static Analysis Integration**: clang-tidy integration for automated code quality checks
-- **Batch Processing**: Process all source files in directory with single command
-- **Build Artifact Management**: Clean up executables, object files, and debug information
-- **Compiler Information**: Display Clang version, targets, and available LLVM tools
-- **Cross-Platform Ready**: Easily adaptable batch scripts for consistent compilation workflows
+- **Quick compilation scripts** - Auto-detect and compile C/C++ files with various configurations
+- **CMake project templates** - Generate ready-to-use C23 and C++26 projects
+- **Code quality tools** - Integrated clang-format and clang-tidy support
+- **Multiple build modes** - Debug, Release, Sanitizer, and Threading configurations
+- **Standard detection utilities** - Verify C/C++ standard compliance
 
-## File Structure
+## Prerequisites
 
-```
-Project Directory/
-├── [Your C/C++ source files - .c and .cpp]
-├── 0_compile_auto.bat                     # Standard development build
-├── 0_compile_auto_fsanitize.bat           # Development build with AddressSanitizer
-├── 0_compile_auto_release.bat             # Optimized release build
-├── 0_compile_auto_threaded.bat            # Development build with threading support
-├── 1_remove.bat                           # Clean up all build artifacts
-├── 2_analyze_static.bat                   # Run clang-tidy static analysis
-├── 3_compiler_info.bat                    # Display Clang installation information
-└── README.md                              # This documentation
-```
+- **Clang** 21 or newer
+- **CMake** 4.2.0 or newer
+- **Ninja** 1.13 or newer
 
-## Installation
+- If you are on Windows you can run `winget -upgrade` to show the list of programs that need updating and then run `winget -upgrade --all` which can upgrade LLVM/Clang and CMake.
+- With Ninja you will have to update it manually and simply replace the exe with the new one that you get here (https://github.com/ninja-build/ninja/releases)
+- Here is how to setup LLVM on Windows (https://www.youtube.com/watch?v=WNvL4hGid3Y)
 
-### Prerequisites
+## Quick Compilation Scripts
 
-- Windows Operating System
-- **LLVM Clang** installed and added to PATH (required for all compilation)
-- **clang-tidy** (optional, for static analysis - usually included with LLVM)
+### Standard Builds
 
-### Setup
+- `0_compile_auto.bat` - Debug build with C23/C++26 standards
+- `0_compile_auto_release.bat` - Optimized release build with `-O3` and `-DNDEBUG` flags
+- `0_compile_auto_thread.bat` - Debug build with pthread support
+- `0_compile_auto_fsanitize.bat` - Debug build with AddressSanitizer
 
-1. **Install LLVM Clang**:
-   - Download from [https://github.com/llvm/llvm-project/releases](https://github.com/llvm/llvm-project/releases)
-   - Run the installer and ensure "Add LLVM to system PATH" is checked
-   - Verify installation by running `clang --version` in Command Prompt
+### Utility Scripts
 
-2. **Download the Clang Batch Compiler**:
-```bash
-git clone https://github.com/RLR64/Clang-Batch-Compiler
-```
+- `1_remove.bat` - Clean build artifacts (`.exe`, `.obj`, `.pdb`, `.ilk`)
+- `2_static_analysis.bat` - Run clang-tidy on all C/C++ files
+- `3_compiler_info.bat` - Display Clang version and available LLVM tools
+- `4_setup_clang_format_clangd.bat` - Generate a custom LLVM `.clang-format` file and `.clangd` file used for debug
 
-3. Copy the batch files to your C/C++ project directory and you're ready to compile your code!
+### Project Generators
+
+- `5_generate_c_project.bat` - Create C23 Hello World project with CMake setup
+- `5_generate_cpp_project.bat` - Create C++26 Hello World project with CMake setup
+- You can check what the CMakelists.txt and CMakePresets.json file that you can find in the CMake Examples for both C23 and C++26
+- Feel free to edit them to your needs
 
 ## Usage
 
-### Step-by-Step Workflow
+### Quick Compilation
 
-#### Step 1: Prepare Your Source Files
-1. Place your `.c` and `.cpp` files in the same directory as the batch files
-2. Supported standards: C23 for C files, C++23 for C++ files
-3. Files are processed from the current directory only
-
-#### Step 2: Choose Compilation Mode
-
-**Standard Development Build:**
-Use for regular development with debug information and strict warnings.
-- **Command**: `0_compile_auto.bat`
-- **Flags**: `-std=c23/c++23 -Wall -Wextra -Werror -g -O0`
-- **Use case**: Daily development, debugging
-
-**AddressSanitizer Build:**
-Use for memory debugging and detecting memory-related issues.
-- **Command**: `0_compile_auto_fsanitize.bat`
-- **Flags**: Standard flags + `-fsanitize=address`
-- **Use case**: Memory leak detection, buffer overflow detection
-
-**Release Build:**
-Use for optimized production builds.
-- **Command**: `0_compile_auto_release.bat`
-- **Flags**: `-std=c23/c++23 -Wall -Wextra -Werror -O2`
-- **Use case**: Final builds, performance testing
-
-**Threading Build:**
-Use for applications using threading libraries.
-- **Command**: `0_compile_auto_threaded.bat`
-- **Flags**: Standard flags + `-pthread`
-- **Use case**: Multi-threaded applications, concurrent programming
-
-#### Step 3: Static Analysis
-
-Run automated code quality analysis:
-- **Command**: `2_analyze_static.bat`
-- **Tool**: Uses clang-tidy for comprehensive static analysis
-- **Output**: Identifies potential issues, coding standard violations
-
-#### Step 4: System Information
-
-Check your Clang installation and available features:
-- **Command**: `3_compiler_info.bat`
-- **Output**: Clang version, supported targets, available LLVM tools
-
-#### Step 5: Cleanup
-
-Remove all build artifacts:
-- **Command**: `1_remove.bat`
-- **Removes**: `.exe`, `.obj`, `.pdb`, `.ilk` files
-
-## Compilation Specifications
-
-### Development Build (`0_compile_auto.bat`)
-- **C Standard**: C23
-- **C++ Standard**: C++23
-- **Optimization**: None (`-O0`)
-- **Debug Info**: Full (`-g`)
-- **Warnings**: All warnings as errors (`-Wall -Wextra -Werror`)
-
-### Release Build (`0_compile_auto_release.bat`)
-- **Standards**: C23/C++23
-- **Optimization**: Level 2 (`-O2`)
-- **Debug Info**: None
-- **Warnings**: All warnings as errors
-
-### AddressSanitizer Build (`0_compile_auto_fsanitize.bat`)
-- **Base**: Development build configuration
-- **Additional**: AddressSanitizer (`-fsanitize=address`)
-- **Purpose**: Memory error detection
-
-### Threading Build (`0_compile_auto_threaded.bat`)
-- **Base**: Development build configuration
-- **Additional**: POSIX threads (`-pthread`)
-- **Purpose**: Multi-threaded application support
-
-## Recommended Workflows
-
-### Workflow 1: Standard Development
-1. Write your C/C++ source code
-2. Run `0_compile_auto.bat` for development builds
-3. Test your executables
-4. Run `2_analyze_static.bat` for code quality checks
-5. Clean up with `1_remove.bat` when done
-
-### Workflow 2: Memory Debugging
-1. Compile with `0_compile_auto_fsanitize.bat`
-2. Run executables to detect memory issues
-3. Address any AddressSanitizer reports
-4. Recompile with standard build for final testing
-
-### Workflow 3: Release Preparation
-1. Ensure code passes static analysis (`2_analyze_static.bat`)
-2. Test with development build (`0_compile_auto.bat`)
-3. Build optimized release version (`0_compile_auto_release.bat`)
-4. Perform final testing on release build
-
-### Workflow 4: Threading Development
-1. Use `0_compile_auto_threaded.bat` for pthread-based applications
-2. Test concurrent functionality
-3. Run with AddressSanitizer to catch threading issues
-4. Build release version when stable
-
-## Output Behavior
-
-- **Executable Location**: Created in the same directory as source files
-- **Naming Convention**: `filename.exe` (matches source file name)
-- **Batch Processing**: All matching files in directory are compiled
-- **Error Handling**: Compilation failures are reported with detailed error messages
-- **Summary Reporting**: Each batch file provides compilation statistics
-
-## Troubleshooting
-
-### Common Issues
-
-**"clang not recognized" error**
-- Ensure LLVM Clang is installed and added to system PATH
-- Try running `clang --version` in Command Prompt to verify installation
-- Run `3_compiler_info.bat` to check installation status
-- Restart Command Prompt after installing LLVM
-
-**Compilation failures with `-Werror`**
-- The scripts use strict warning policies that treat warnings as errors
-- Review compiler output for specific warning details
-- Fix warnings or temporarily modify batch files to remove `-Werror`
-
-**Static analysis not available**
-- clang-tidy may not be installed with your LLVM distribution
-- Run `3_compiler_info.bat` to check clang-tidy availability
-- Install complete LLVM package or add clang-tidy separately
-
-**Threading compilation issues**
-- Ensure your system supports pthread
-- Windows users may need additional threading library setup
-- Consider using Windows threading APIs instead of pthread
-
-**No source files found**
-- Verify `.c` and `.cpp` files exist in the current directory
-- Check file extensions match expected patterns
-- Ensure files are not in subdirectories
-
-## Performance Tips
-
-1. **Use appropriate build types**: Development for debugging, release for performance
-2. **Leverage static analysis**: Catch issues early with `2_analyze_static.bat`
-3. **Clean regularly**: Use `1_remove.bat` to manage disk space
-4. **Check compiler info**: Run `3_compiler_info.bat` to understand your setup
-5. **Batch efficiently**: Process multiple files simultaneously with single commands
-
-## Customization
-
-### Modifying Compilation Flags
-Edit batch files to customize compilation behavior:
-
+Place your `.c` or `.cpp` files in the same directory as the scripts and run the desired batch file:
 ```batch
-# Change C++ standard
-clang++ -std=c++20 ...
-
-# Add custom preprocessor definitions
-clang -DDEBUG -DVERSION=1.0 ...
-
-# Include additional directories
-clang -I./include -I./lib ...
-
-# Link external libraries
-clang -lmath -lpthread ...
+0_compile_auto.bat              # Standard debug build
+0_compile_auto_release.bat      # Optimized release build
+0_compile_auto_fsanitize.bat    # With memory safety checks
+0_compile_auto_thread.bat       # With threading support
 ```
 
-### Adding New Build Configurations
-Create additional batch files following the naming convention:
-- `0_*`: Primary compilation scripts
-- `1_*`: Cleanup and maintenance
-- `2_*`: Analysis and tools
-- `3_*`: Information and diagnostics
+Scripts automatically:
+- Detect and compile all C/C++ files in current directory
+- Apply strict compiler warning flags
+- Use C23 Standard for `.c` files and C++26 Standard for `.cpp` files
+- You can always edit and change them later to your liking 
+- Report compilation statistics like whic files compiled successful or failed
 
-## Contributing
+### Generate New Project
 
-Contributions are welcome! Areas for improvement:
-- Additional compilation profiles (profile-guided optimization, cross-compilation)
-- Integration with other LLVM tools (clang-format, scan-build)
-- Enhanced static analysis configurations
-- Support for external libraries and frameworks
+```batch
+5_generate_cpp_project.bat      # Create C++26 hello world project
+5_generate_c_project.bat        # Create C23 hello world project
+```
+
+Creates the following project structure:
+
+```
+your-project/
+├── src/
+│   └── main.cpp (or main.c)
+├── include/
+├── debug/
+├── release/
+├── CMakeLists.txt
+└── CMakePresets.json
+```
+
+### Build with CMake
+
+```batch
+# Debug build
+cmake --preset debug
+cmake --build debug/
+debug/hello_world.exe
+
+# Release build
+cmake --preset release
+cmake --build release/
+release/hello_world.exe
+```
+
+### Code Quality
+
+```batch
+4_setup_clang_format_clangd.bat      # Format all C/C++ files and generates a clangd file
+2_static_analysis.bat                # Run static analysis
+1_remove.bat                         # Clean build artifacts
+```
+
+## Compiler Flags
+
+### Debug Builds
+
+- **Standards:** `-std=c23` / `-std=c++26`
+- **Warnings:** `-Wall -Wcast-align -Wconversion -Wdouble-promotion -Werror -Wextra -Wformat=2 -Wnull-dereference -Wpedantic -Wshadow`
+- **Debug:** `-g -O0`
+
+### Release Builds
+
+- **Optimization:** `-O3 -DNDEBUG`
+- All warning flags enabled
+
+### Sanitizer Builds
+
+- **Sanitizers:** `-fsanitize=address,undefined`
+- All debug flags enabled
+
+## CMake Configuration
+
+Generated projects include the following:
+
+### CMakeLists.txt
+- C23 / C++26 standard enforcement
+- Strict compiler warnings
+- `compile_commands.json` generation for ClangD
+- Clean project structure
+
+### CMakePresets.json
+
+- **Debug preset:** 
+- Full debugging symbols, no optimization
+
+- **Release preset:** Maximum optimization
+- Ninja generator for fast builds
+- Separate build directories (`debug/` and `release/`)
+
+- **CMake Commands For Debug Build**
+- cmake --preset debug
+- cmake --build debug/
+
+- **CMake Commands For Release Build**
+- cmake --preset release
+- cmake --build release/
+
+## Examples
+
+Check the included example directories for complete working projects:
+- `C++26 CMake Example/` - Hello World C++ project template
+- `C23 CMake Example/` - Hello World C project template
+
+Each example includes:
+- Complete `CMakeLists.txt` and `CMakePresets.json`
+- Sample source files
+- Ready-to-build structure
+
+## Standard C and C++ Detection
+
+- There is an included print_c_standard.c and print_cpp_standard.cpp files included where you can run the 0_compile_auto.bat file which will compile both of the files into their own exes.
+- When running them they will tell you which Standard you are using and the code is a edited version on the L
+
+## Notes
+
+- All compilation scripts process files in the current directory
+- CMake projects use separate `debug/` and `release/` build directories
+- Original files remain untouched during processing
+- clang-format uses a custom LLVM style format for all .c .h .cpp and .hpp files
+- Like to give a shoutout to Erarnitox on showing in the Droplet project how to setup the CMakePresets.json file (Big help with this one!)
+- (https://github.com/Erarnitox/Droplet/blob/main/CMakePresets.json)
+
+## Learning Resources
+
+- Here are some resources you can check out if you want to learn C and C++ programming 🔥
+
+### C Programming
+
+- [C Reference](https://en.cppreference.com/w/c) - Comprehensive C language reference
+- [Learn C (Boot.dev)](https://www.boot.dev/courses/learn-memory-management-c) - Interactive C course on Boot Dev
+- [Learn C (YouTube)](https://www.youtube.com/watch?v=rJrd2QMVbGM) - Video tutorial on Boot Dev YouTube Channel
+- [Mastering C23](https://simplifycpp.org/books/cpp/Mastering_C23.pdf) - Guide to Low-Level Programming
+- [C Programming](https://simplifycpp.org/books/cpp/C23_Deep_Dive_into_Modern_Power_for_Systems_and_Classic_C_Programmers.pdf) - C23 Deep Dive
+
+### C++ Programming
+
+- [C++ Reference](https://en.cppreference.com/w/cpp) - Comprehensive C++ language reference
+- [LearnCpp.com](https://www.learncpp.com/) - Free comprehensive C++ tutorial
+- [CppCon YouTube](https://www.youtube.com/@CppCon) - Conference talks on modern C++
+- [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines) - Best practices by Bjarne Stroustrup
+- [C++ Book Series](https://simplifycpp.org/?id=cp) - A collection of specialized books covering all areas of modern C++
+- [Learn Modern C++23](https://www.youtube.com/playlist?list=PLTjUlazALHSBQp4jdqHTCduTSSMU-cz5P) - Erarnitox course on C++23
+- [Jason Turner](https://www.youtube.com/@cppweekly) - Great C++ channel
+- [MetalSilicon](https://www.youtube.com/@MetalSiliconYT) - Great channel on helping everyone understand low level Software Engineering
+
+### Online C++ Tools
+
+- [Compiler Explorer](https://compiler-explorer.com) - See how your code compiles
+- [C++ Insights](https://cppinsights.io/) - See what the compiler does with your code
+- [Quick Bench](https://quick-bench.com/) - Benchmark your C++ code online
+- [C++ Draft Search](https://wg21.cmeerw.net/cppdraft/search) - Search the C++ standard draft
+- [C++ Working Draft](https://eel.is/c++draft/) - Official C++ standard draft
+- [C++ Standard Search](https://search.cpp-lang.org/) - Fast standard search
+- [C++ Evolution](https://cppevo.dev/) - Track C++ language evolution
+- [C++ Status](https://cppstat.org/) - Compiler support for C++ features
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Acknowledgments
+## References/Attribution
 
-- Built for C/C++ developers who value simplicity and efficiency
-- Powered by LLVM Clang for modern, standards-compliant compilation
-- Designed for Windows development environments
-- Created for developers who prefer lightweight, scriptable build tools
-
-## Attribution
-Icon designed by Abdulla Ashraf from freepik ([author profile](https://www.freepik.com/))
-Edited with a black glow.
-
-LLVM Logo from the LLVM Foundation ([llvm.org](https://llvm.org))
-Edited with a black glow.
-
----
-
-**Note**: This toolkit is designed for Windows environments since batch files only work on Windows and requires the correct LLVM Clang setup. All scripts maintain strict compilation standards while providing flexible, automated build workflows.
+- [C/C++ Documentation](https://en.cppreference.com/w/)
+- [Clang Support Status](https://cppstat.org/?tags=cpp,c,clang)
+- [LLVM Project](https://llvm.org/)
+- [CMake Documentation](https://cmake.org/documentation/)
+- [Learn C++](https://www.learncpp.com/)
+- [Erarnitox](https://github.com/Erarnitox | https://www.youtube.com/@Erarnitox)
