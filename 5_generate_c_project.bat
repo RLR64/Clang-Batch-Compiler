@@ -14,7 +14,7 @@ echo.
 
 :: Generate CMakeLists.txt
 (
-echo cmake_minimum_required^(VERSION 4.2^)
+echo cmake_minimum_required^(VERSION 4.3^)
 echo.
 echo # Project Name and Lanuage
 echo project^(hello_world C^)
@@ -48,7 +48,7 @@ echo {
 echo     "version" : 8,
 echo     "cmakeMinimumRequired": {
 echo         "major" : 4,
-echo         "minor" : 2,
+echo         "minor" : 3,
 echo         "patch" : 0
 echo     },
 echo     "configurePresets" : [

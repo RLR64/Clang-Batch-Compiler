@@ -5,9 +5,9 @@
 
 #include <stdio.h>
 
-static const int numCStandards = 5;
-static const long cStdCode[5] = {199409L, 199901L, 201112L, 201710L, 202311L};
-static const char *cStdName[5] = {"C95", "C99", "C11", "C17", "C23"};
+static const int   numCStandards = 5;
+static const long  cStdCode[5]   = {199409L, 199901L, 201112L, 201710L, 202311L};
+static const char* cStdName[5]   = {"C95", "C99", "C11", "C17", "C23"};
 
 static long getCStandard(void) {
 #if defined(__STDC_VERSION__)
@@ -21,7 +21,7 @@ static long getCStandard(void) {
 
 int main(void) {
 	const long standard = getCStandard();
-	int found = 0;
+	int        found    = 0;
 
 	if (standard == -1) {
 		printf("Error: Unable to determine your C language standard.\n");
@@ -30,16 +30,15 @@ int main(void) {
 
 	for (int i = 0; i < numCStandards; i++) {
 		if (standard == cStdCode[i]) {
-			printf("Your compiler is using %s (standard code %ldL)\n",
-				   cStdName[i], standard);
+			printf("Your compiler is using %s (standard code %ldL)\n", cStdName[i], standard);
 			found = 1;
 			break;
 		}
 
 		if (standard < cStdCode[i]) {
 			printf("Your compiler is using a preview/pre-release of %s "
-				   "(standard code %ldL)\n",
-				   cStdName[i], standard);
+			       "(standard code %ldL)\n",
+			       cStdName[i], standard);
 			found = 1;
 			break;
 		}
@@ -47,12 +46,11 @@ int main(void) {
 
 	if (!found) {
 		if (standard == 198900L) {
-			printf("Your compiler is using C89/C90 (standard code %ldL)\n",
-				   standard);
+			printf("Your compiler is using C89/C90 (standard code %ldL)\n", standard);
 		} else {
 			printf("Your compiler is using an unknown/future C standard (code "
-				   "%ldL)\n",
-				   standard);
+			       "%ldL)\n",
+			       standard);
 		}
 	}
 	return 0;

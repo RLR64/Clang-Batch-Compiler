@@ -12,8 +12,8 @@ A collection of Windows batch scripts for efficient C/C++ development using Clan
 
 ## Prerequisites
 
-- **Clang** 21 or newer
-- **CMake** 4.2.0 or newer
+- **Clang** 22 or newer
+- **CMake** 4.3.0 or newer
 - **Ninja** 1.13 or newer
 
 If you are on Windows you can run `winget -upgrade` to show the list of programs that need updating and then run `winget -upgrade --all` which can upgrade LLVM/Clang and CMake.
@@ -35,6 +35,7 @@ Here is how to setup LLVM on Windows (https://www.youtube.com/watch?v=WNvL4hGid3
 - `2_static_analysis.bat` - Run clang-tidy on all C/C++ files
 - `3_compiler_info.bat` - Display Clang version and available LLVM tools
 - `4_setup_clang_format_clangd.bat` - Generate a custom LLVM `.clang-format` file and `.clangd` file used for debug
+- `4_setup_clang_tidy.bat` - Generate a custom `.clang-tidy` file
 
 ### Project Generators
 
@@ -58,6 +59,7 @@ Place your `.c` or `.cpp` files in the same directory as the scripts and run the
 
 Scripts automatically:
 - Detect and compile all C/C++ files in current directory
+- Detect and apply fixes using `.clang-tidy`
 - Apply strict compiler warning flags
 - Use C23 Standard for `.c` files and C++26 Standard for `.cpp` files
 - You can always edit and change them later to your liking 
@@ -100,6 +102,7 @@ release/hello_world.exe
 ### Code Quality
 
 ```batch
+4_setup_clang_tidy.bat               # Applies warnings and fixes to all C/C++ files
 4_setup_clang_format_clangd.bat      # Format all C/C++ files and generates a clangd file
 2_static_analysis.bat                # Run static analysis
 1_remove.bat                         # Clean build artifacts

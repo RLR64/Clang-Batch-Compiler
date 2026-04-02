@@ -5,11 +5,9 @@
 #include <iostream>
 #include <string>
 
-static const long stdCode[] = {199711L, 201103L, 201402L, 201703L,
-							   202002L, 202302L, 202602L}; // Fixed C++26 date
+static const long stdCode[] = {199711L, 201103L, 201402L, 201703L, 202002L, 202302L, 202602L}; // Fixed C++26 date
 
-static const std::string stdName[] = {"Pre-C++11", "C++11", "C++14", "C++17",
-									  "C++20",	   "C++23", "C++26"};
+static const std::string stdName[] = {"Pre-C++11", "C++11", "C++14", "C++17", "C++20", "C++23", "C++26"};
 
 // Calculate array size automatically
 static const int numStandards = sizeof(stdCode) / sizeof(stdCode[0]);
@@ -36,16 +34,14 @@ int main() {
 
 	for (int i = 0; i < numStandards; ++i) {
 		if (standard == stdCode[i]) {
-			std::cout << "Your compiler is using " << stdName[i]
-					  << " (language standard code " << standard << "L)\n";
+			std::cout << "Your compiler is using " << stdName[i] << " (language standard code " << standard << "L)\n";
 			found = true;
 			break;
 		}
 
 		if (standard < stdCode[i]) {
-			std::cout << "Your compiler is using a preview/pre-release of "
-					  << stdName[i] << " (language standard code " << standard
-					  << "L)\n";
+			std::cout << "Your compiler is using a preview/pre-release of " << stdName[i] << " (language standard code "
+			          << standard << "L)\n";
 			found = true;
 			break;
 		}
@@ -54,7 +50,7 @@ int main() {
 	// Fallback for standards newer than this script knows about (e.g., C++29)
 	if (!found) {
 		std::cout << "Your compiler is using a standard newer than C++26 "
-				  << "(language standard code " << standard << "L)\n";
+		          << "(language standard code " << standard << "L)\n";
 	}
 
 	return 0;
